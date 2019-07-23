@@ -1,11 +1,8 @@
-const mapSize = 4;
+const mapSize = 8;
 
 var map = [];
 
-var peeps = [
-  {x: 0, y: 3, symbol:"M", id: 1},
-  {x: 1, y: 3, symbol:"F", id: 2}
-]
+
 
 
 var day = 0;
@@ -69,9 +66,7 @@ function printTable(tbody){
   tbody.parentNode.replaceChild(newTbody, tbody);
   return tbody;
 }
-function addPeep(father, mother){
-  peeps.push({x: mother.x, y: mother.y, symbol:"X", id: peeps.length})
-}
+
 
 function canMove(subject, movement){
   var result = false;
@@ -82,7 +77,7 @@ function canMove(subject, movement){
       //if two peeps are on top of each other, shout
 
       peeps.forEach(peep => {
-        if (peep.id != subject.id && peep.x === subject.x && peep.y === subject.y){
+        if (peep.symbol === "F" && subject.symbol === "M" && peep.x === subject.x && peep.y === subject.y){
           console.log("woot!")
           addPeep(peep, subject);
         }
