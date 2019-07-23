@@ -3,8 +3,8 @@ const mapSize = 4;
 var map = [];
 
 var peeps = [
-  {x: 0, y: 3, symbol:"M"},
-  {x: 1, y: 3, symbol:"F"}
+  {x: 0, y: 3, symbol:"M", id: 1},
+  {x: 1, y: 3, symbol:"F", id: 2}
 ]
 
 
@@ -36,7 +36,7 @@ function initiateMap(){
   return map
 }
 
-function printTable(tbody, map){
+function printTable(tbody){
   initiateMap();
   //find peeps current locations, put in map
 
@@ -69,6 +69,9 @@ function printTable(tbody, map){
   tbody.parentNode.replaceChild(newTbody, tbody);
   return tbody;
 }
+function addPeep(father, mother){
+  peeps.push({x: mother.x, y: mother.y, symbol:"X", id: peeps.length})
+}
 
 function canMove(subject, movement){
   var result = false;
@@ -76,6 +79,14 @@ function canMove(subject, movement){
   if(subject.x + movement.x >= 0 && subject.x + movement.x < mapSize){
     if(subject.y + movement.y >= 0 && subject.y + movement.y < mapSize){
       result = true;
+      //if two peeps are on top of each other, shout
+
+      peeps.forEach(peep => {
+        if (peep.id != subject.id && peep.x === subject.x && peep.y === subject.y){
+          console.log("woot!")
+          addPeep(peep, subject);
+        }
+      });
     }
   }
 
@@ -107,7 +118,7 @@ function newDay(n){
       move(peep);
     });
 
-    printTable (document.getElementById("map"), map);
+    printTable (document.getElementById("map"));
 
     document.getElementById("day").innerHTML = "Day: " + day;
     n--;
@@ -116,6 +127,6 @@ function newDay(n){
 }
 
 initiateMap();
-printTable (document.getElementById("map"), map);
+printTable (document.getElementById("map"));
 
 document.getElementById("day").innerHTML = "Day: " + day;
