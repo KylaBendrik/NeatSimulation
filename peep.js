@@ -7,10 +7,8 @@ function addPeep(father, mother){
   const genders = ["M", "F"]
   var gender = genders[Math.floor(Math.random()*genders.length)]
   peeps.push({x: mother.x, y: mother.y, symbol:gender, id: peeps.length})
+
+  //somehow combine brains
 }
 
-//moves:
-//0 - north
-//1 - east
-//2 - south
-//3 - west
+
