@@ -1,1 +1,1 @@
-NeatSimulation
+NeatSimulator
