@@ -34,24 +34,35 @@ function findState(peep){
   // XXX
   // XXX
 
-  const distance = 1;
+  //starting space = subtract distance from both x and y
 
-  
+  var startingSpot = {
+    x: peep.x - peep.distance, 
+    y: peep.y - peep.distance
+  }
+
+  var diameter = (peep.distance * 2) + 1;
+  //if peep.distance = 1, then diameter = 3
+
+  var rowNum = 0
+  var state = [];
+
+  while (rowNum < diameter){
+    
+    var colNum = 0
+    while (colNum < diameter){
+      console.log ("row = " + (startingSpot.y + rowNum) + ", col = " + (startingSpot.x + colNum))
+      colNum ++;
+      state.push(map[startingSpot.x + colNum][startingSpot.y + rowNum])
+    }
+
+    rowNum ++;
+  }
+
+  console.log (map);
+  console.log (state);
 }
 
 function move(peep){
-  const options = [
-    {x: 0, y: -1},
-    {x: 0, y: 1},
-    {x: -1, y: 0},
-    {x: 1, y: 0}
-  ];
-  var random = Math.floor(Math.random() * options.length);
-  console.log(random);
-  var movement = options[random];
-  console.log(movement)
-  if (canMove(peep, movement)){
-    peep.x += movement.x;
-    peep.y += movement.y;
-  }
+  findState(peep);
 }
