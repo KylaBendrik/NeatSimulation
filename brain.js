@@ -61,7 +61,6 @@ function findState(peep){
     
     var colNum = 0
     while (colNum < diameter){
-      console.log ("row = " + (startingSpot.y + rowNum) + ", col = " + (startingSpot.x + colNum) + ": " + map[startingSpot.y + rowNum][startingSpot.x + colNum])
       var newNum = stateNums[map[startingSpot.y + rowNum][startingSpot.x + colNum]];
       state =  ((state << 3) + newNum);
 
@@ -70,11 +69,7 @@ function findState(peep){
     }
 
     rowNum ++;
-  }
-
-
-  console.log (map);
-  
+  } 
    
   return state;
 }
@@ -95,12 +90,9 @@ function move(peep){
 
   var move = state.moves[random]
 
-  console.log("state moves = " + state.moves.length)
-
-  console.log("we will move x -> " + moveTypes[move].x)
-
   peep.x += moveTypes[move].x;
   peep.y += moveTypes[move].y;
 
-  console.log(peep)
+  console.log(peep.symbol + "'s brain states: (" + peep.brain.states.length + ") ")
+  console.log(peep.brain.states)
 }
