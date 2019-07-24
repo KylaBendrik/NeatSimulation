@@ -1,4 +1,4 @@
-const mapSize = 8;
+const mapSize = 5;
 var map = [];
 var day = 0;
 
