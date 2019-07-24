@@ -9,7 +9,7 @@ function canMove(subject, movement){
       peeps.forEach(peep => {
         if (peep.symbol === "F" && subject.symbol === "M" && peep.x === subject.x && peep.y === subject.y){
           console.log("woot!")
-          addPeep(peep, subject);
+          //addPeep(peep, subject);
         }
       });
     }
@@ -53,15 +53,20 @@ function findState(peep){
 
   var stateNums = {
     __: 0,
-    M: 1,
-    F: 2
+    X: 1,
+    M: 2,
+    F: 3
   }
 
   while (rowNum < diameter){
     
     var colNum = 0
     while (colNum < diameter){
-      var newNum = stateNums[map[startingSpot.y + rowNum][startingSpot.x + colNum]];
+      if (map[startingSpot.y + rowNum] === undefined || map[startingSpot.y + rowNum][startingSpot.x + colNum] === undefined){
+        var newNum = 1;
+      } else {
+        var newNum = stateNums[map[startingSpot.y + rowNum][startingSpot.x + colNum]];
+      }
       state =  ((state << 3) + newNum);
 
       
@@ -90,10 +95,15 @@ function move(peep){
 
   var move = state.moves[random]
 
-  peep.x += moveTypes[move].x;
-  peep.y += moveTypes[move].y;
+  console.log(canMove(peep, moveTypes[move]))
 
-  peep.brain.history.push({state: stateID, move: move})
+  if (canMove(peep, moveTypes[move])){
+    peep.x += moveTypes[move].x;
+    peep.y += moveTypes[move].y;
+
+    peep.brain.history.push({state: stateID, move: move})
+  }
+
 
   console.log(peep.symbol + "'s brain states: (" + peep.brain.states.length + ") ")
   console.log(peep.brain.states)
