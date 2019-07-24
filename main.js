@@ -1,6 +1,14 @@
-const mapSize = 5;
+const mapSize = 8;
 var map = [];
 var day = 0;
+
+function mapColors(symbol){
+  return {
+    "__": "#FFFFFF",
+    "M": "#a9d5ff",
+    "F": "#f6aaff"
+  }[symbol]
+}
 
 function initiateMap(){
   var r = 0;
@@ -44,6 +52,8 @@ function printTable(tbody){
       var cell = document.createElement("td");
   
       cell.appendChild(document.createTextNode(map[r][c]));
+
+      cell.style.backgroundColor = mapColors(map[r][c])
   
       row.appendChild(cell);
 

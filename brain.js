@@ -7,12 +7,18 @@ function canMove(subject, movement){
       //if two peeps are on top of each other, shout
 
       peeps.forEach(peep => {
-        if ((peep.symbol === "F" && subject.symbol === "M") || (peep.symbol === "M" && subject.symbol === "F")){
-          if (peep.x === subject.x && peep.y === subject.y){
+        if (peep.x === subject.x && peep.y === subject.y){
+          if (peep.symbol === "M" && subject.symbol === "F"){
             console.log("History saved")
             reward(peep);
             reward(subject);
-            //addPeep(peep, subject);
+            addPeep(peep, subject);
+          }
+          if (peep.symbol === "F" && subject.symbol === "M"){
+            console.log("History saved")
+            reward(peep);
+            reward(subject);
+            addPeep(subject, peep);
           }
         }
       });
