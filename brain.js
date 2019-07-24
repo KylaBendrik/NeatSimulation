@@ -80,15 +80,27 @@ function findState(peep){
 }
 
 function move(peep){
+  const moveTypes = [{x: 0, y: -1}, {x: 1, y:0}, {x: 0, y:1}, {x: -1, y:0}]
   var stateID = findState(peep);
   console.log((stateID).toString(2) + " = " + stateID);
   //if state is new, then newDefaultState
   if (peep.brain.states.findIndex(state => state.id === stateID) === -1){
     var state = newDefaultState(stateID);
     peep.brain.states.push(state);
+  } else {
+    var state = peep.brain.states.find(state => state.id === stateID);
   }
 
-  
+  var random = Math.floor(Math.random() * state.moves.length)
+
+  var move = state.moves[random]
+
+  console.log("state moves = " + state.moves.length)
+
+  console.log("we will move x -> " + moveTypes[move].x)
+
+  peep.x += moveTypes[move].x;
+  peep.y += moveTypes[move].y;
 
   console.log(peep)
 }
