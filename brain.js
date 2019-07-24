@@ -14,7 +14,13 @@ function canMove(subject, movement){
             reward(subject);
             addPeep(peep, subject);
           }
+          if (peep.symbol === subject.symbol && peep.id != subject.id){
+            console.log("nope. not a good plan")
+              punish(peep);
+              punish(subject);
+          }
         }
+        
       });
     }
   }
@@ -36,7 +42,19 @@ function reward(peep){
 }
 
 function punish(peep){
+  //remove move done to each state walked through
+  peep.brain.history.forEach(click => {
+    console.log(click.state + " peep went " + click.move)
+    var state = peep.brain.states.find(state => state.id === click.state);
+    
+    //remove move
+    var indexOfMove = peep.brain.states.moves.findIndex(move => move === click.move);
+    
+    state.moves.splice(indexOfMove, 1)
+  })
 
+  //wipe history
+  peep.brain.history = [];
 }
 
 //moves:
