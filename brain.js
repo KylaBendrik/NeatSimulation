@@ -14,12 +14,6 @@ function canMove(subject, movement){
             reward(subject);
             addPeep(peep, subject);
           }
-          if (peep.symbol === "F" && subject.symbol === "M"){
-            console.log("History saved")
-            reward(peep);
-            reward(subject);
-            addPeep(subject, peep);
-          }
         }
       });
     }
