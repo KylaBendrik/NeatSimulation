@@ -1,5 +1,5 @@
 var peeps = [
-  //{x: 1, y: 3, symbol:"M", id: 1, brain: {}, moves: [], distance: 1},
+  {x: 1, y: 3, symbol:"M", id: 1, brain: {}, moves: [], distance: 1},
   {x: 3, y: 3, symbol:"F", id: 2, brain: {}, moves: [], distance: 1}
 ];
 

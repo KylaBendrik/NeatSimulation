@@ -45,19 +45,27 @@ function findState(peep){
   //if peep.distance = 1, then diameter = 3
 
   var rowNum = 0
-  var state = [];
+  var state = "";
+
+  var stateNums = {
+    __: "000",
+    M: "001",
+    F: "010"
+  }
 
   while (rowNum < diameter){
     
     var colNum = 0
     while (colNum < diameter){
-      console.log ("row = " + (startingSpot.y + rowNum) + ", col = " + (startingSpot.x + colNum))
+      console.log ("row = " + (startingSpot.y + rowNum) + ", col = " + (startingSpot.x + colNum) + ": " + map[startingSpot.x + colNum][startingSpot.y + rowNum])
+
+      state += (stateNums[map[startingSpot.x + colNum][startingSpot.y + rowNum]])
       colNum ++;
-      state.push(map[startingSpot.x + colNum][startingSpot.y + rowNum])
     }
 
     rowNum ++;
   }
+
 
   console.log (map);
   console.log (state);
