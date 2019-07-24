@@ -1,6 +1,6 @@
 var peeps = [
-  {x: 2, y: 3, symbol:"M", id: 1, brain: {states: [], moves: []}, distance: 1},
-  {x: 3, y: 3, symbol:"F", id: 2, brain: {states: [], moves: []}, distance: 1}
+  {x: 2, y: 3, symbol:"M", id: 1, brain: {states: [], history: []}, distance: 1},
+  {x: 3, y: 3, symbol:"F", id: 2, brain: {states: [], history: []}, distance: 1}
 ];
 
 function addPeep(father, mother){

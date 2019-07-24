@@ -83,8 +83,12 @@ function move(peep){
   var stateID = findState(peep);
   console.log((stateID).toString(2) + " = " + stateID);
   //if state is new, then newDefaultState
-  var state = newDefaultState(stateID);
-  peeps.brain.states.push(state);
+  if (peep.brain.states.findIndex(state => state.id === stateID) === -1){
+    var state = newDefaultState(stateID);
+    peep.brain.states.push(state);
+  }
+
+  
 
   console.log(peep)
 }
