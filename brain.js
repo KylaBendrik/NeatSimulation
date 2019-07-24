@@ -93,6 +93,9 @@ function move(peep){
   peep.x += moveTypes[move].x;
   peep.y += moveTypes[move].y;
 
+  peep.brain.history.push({state: stateID, move: move})
+
   console.log(peep.symbol + "'s brain states: (" + peep.brain.states.length + ") ")
   console.log(peep.brain.states)
+  console.log(peep.brain.history)
 }
