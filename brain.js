@@ -24,6 +24,15 @@ function canMove(subject, movement){
 //2 - south
 //3 - west
 
+function newDefaultState(stateID){
+  return {id: stateID, moves: [0, 1, 2, 3]}
+}
+
+function bin_to_dec(bstr){
+  var b = Number(bstr);
+
+}
+
 function findState(peep){
   //Empty = 000
   //M = 001
@@ -45,12 +54,12 @@ function findState(peep){
   //if peep.distance = 1, then diameter = 3
 
   var rowNum = 0
-  var state = "";
+  var state = [];
 
   var stateNums = {
-    __: "000",
-    M: "001",
-    F: "010"
+    __: 0,
+    M: 1,
+    F: 2
   }
 
   while (rowNum < diameter){
@@ -58,8 +67,10 @@ function findState(peep){
     var colNum = 0
     while (colNum < diameter){
       console.log ("row = " + (startingSpot.y + rowNum) + ", col = " + (startingSpot.x + colNum) + ": " + map[startingSpot.x + colNum][startingSpot.y + rowNum])
+      var newNum = stateNums[map[startingSpot.x + colNum][startingSpot.y + rowNum]];
+      state =  ((state << 3) + newNum);
 
-      state += (stateNums[map[startingSpot.x + colNum][startingSpot.y + rowNum]])
+      
       colNum ++;
     }
 
@@ -68,7 +79,8 @@ function findState(peep){
 
 
   console.log (map);
-  console.log (state);
+  console.log((state).toString(2) + " = " + state);
+  
 }
 
 function move(peep){
