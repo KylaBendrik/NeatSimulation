@@ -1,10 +1,5 @@
 const mapSize = 8;
-
 var map = [];
-
-
-
-
 var day = 0;
 
 function initiateMap(){

@@ -28,11 +28,6 @@ function newDefaultState(stateID){
   return {id: stateID, moves: [0, 1, 2, 3]}
 }
 
-function bin_to_dec(bstr){
-  var b = Number(bstr);
-
-}
-
 function findState(peep){
   //Empty = 000
   //M = 001
@@ -66,8 +61,8 @@ function findState(peep){
     
     var colNum = 0
     while (colNum < diameter){
-      console.log ("row = " + (startingSpot.y + rowNum) + ", col = " + (startingSpot.x + colNum) + ": " + map[startingSpot.x + colNum][startingSpot.y + rowNum])
-      var newNum = stateNums[map[startingSpot.x + colNum][startingSpot.y + rowNum]];
+      console.log ("row = " + (startingSpot.y + rowNum) + ", col = " + (startingSpot.x + colNum) + ": " + map[startingSpot.y + rowNum][startingSpot.x + colNum])
+      var newNum = stateNums[map[startingSpot.y + rowNum][startingSpot.x + colNum]];
       state =  ((state << 3) + newNum);
 
       
@@ -79,10 +74,17 @@ function findState(peep){
 
 
   console.log (map);
-  console.log((state).toString(2) + " = " + state);
   
+   
+  return state;
 }
 
 function move(peep){
-  findState(peep);
+  var stateID = findState(peep);
+  console.log((stateID).toString(2) + " = " + stateID);
+  //if state is new, then newDefaultState
+  var state = newDefaultState(stateID);
+  peeps.brain.states.push(state);
+
+  console.log(peep)
 }
