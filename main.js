@@ -1,113 +1,39 @@
-const mapSize = 8;
-var map = [];
-var day = 0;
+var stage = document.getElementById('svs'), // Get the canvas element by Id
+        ctx = stage.getContext('2d'), // Canvas 2d rendering context
+        x = 10, //intial horizontal position of drawn rectangle
+        y = 10, //intial vertical position of drawn rectangle
+        wid = 20, //width of the drawn rectangle
+        hei = 20; //height of the drawn rectangle
 
-function mapColors(symbol){
-  return {
-    "__": "#FFFFFF",
-    "M": "#a9d5ff",
-    "F": "#f6aaff",
-    "MF": "#c37fff"
-  }[symbol]
+//Draw Rectangle function		
+function drawRect(x,y,wid,hei) {
+    ctx.fillStyle = '#666'; // Fill color of rectangle drawn
+    ctx.fillRect(x, y, wid, hei); //This will draw a rectangle of 20x20
 }
 
-function initiateMap(){
-  var r = 0;
-  var newMap = [];
+drawRect(x,y,wid,hei); //Drawing rectangle on initial load
+
+//move rectangle inside the canvas using arrow keys
+window.onkeydown = function(event) {
+    var keyPr = event.keyCode; //Key code of key pressed
   
-  while (r < mapSize){
-    var row = [];
-
-    var c = 0;
-    while (c < mapSize){
-      //let's have an array containing all the peeps sitting here.
-      row.push([])
-      c++;
+    if(keyPr === 39 && x<=460){ 
+        x = x+20; //right arrow add 20 from current
     }
-
-    newMap.push(row)
-    r++;
-  }
+    else if(keyPr === 37 && x>10){
+        x = x-20; //left arrow subtract 20 from current
+    }
+    else if(keyPr === 38 && y>10) {
+        y = y-20; //top arrow subtract 20 from current
+    }
+    else if(keyPr === 40 && y<=460){
+        y = y+20; //bottom arrow add 20 from current
+    }
+		
+  	/*clearing anything drawn on canvas
+     *comment this below do draw path */
+    ctx.clearRect(0,0, 500, 500);
   
-  peeps.forEach(peep => {
-    newMap[peep.y][peep.x].push(peep.symbol);
-    console.log(newMap[peep.y][peep.x][0])
-  });
-
-  map = newMap;
-
-  return map
-}
-
-function cellDisplay(mapNode){
-  console.log(mapNode)
-  if (mapNode.length === 0){
-    return "__";
-  }
-  if (mapNode.length === 1){
-    return mapNode[0];
-  }
-  if (mapNode.length === 2){
-    var display = (mapNode[0] + mapNode[1]);
-    if (display === "FM"){
-      return (mapNode[1] + mapNode[2])
-    }
-    return (mapNode[0] + mapNode[1])
-  }
-}
-
-function printTable(tbody){
-  initiateMap();
-  //find peeps current locations, put in map
-
-  var newTbody = document.createElement("tbody");
-  var r = 0;
-  while (r < mapSize){
-    var row = document.createElement("tr");
-
-    
-    var c = 0;
-    while (c < mapSize){
-      
-      var cell = document.createElement("td");
-      cell.appendChild(document.createTextNode(cellDisplay(map[r][c])));
-
-      cell.style.backgroundColor = mapColors(map[r][c])
-  
-      row.appendChild(cell);
-
-      c++;
-    }
-
-    newTbody.appendChild(row);
-
-    r++;
-  }
-
-
-
-  newTbody.id = "map";
-  tbody.parentNode.replaceChild(newTbody, tbody);
-  return tbody;
-}
-
-function newDay(n){
-  while (n>0){
-    day ++;
-    
-    peeps.forEach(peep => {
-      move(peep);
-    });
-
-    printTable (document.getElementById("map"));
-
-    document.getElementById("day").innerHTML = "Day: " + day;
-    n--;
-
-  }
-}
-
-initiateMap();
-printTable (document.getElementById("map"));
-
-document.getElementById("day").innerHTML = "Day: " + day;
+  	//Drawing rectangle at new position
+    drawRect(x,y,wid,hei);
+};
