@@ -3,28 +3,30 @@ function canMove(subject, movement){
 
   if(subject.x + movement.x >= 0 && subject.x + movement.x < mapSize){
     if(subject.y + movement.y >= 0 && subject.y + movement.y < mapSize){
-      result = true;
-      //if two peeps are on top of each other, shout
-
-      peeps.forEach(peep => {
-        if (peep.x === subject.x && peep.y === subject.y){
-          if (peep.symbol === "M" && subject.symbol === "F"){
-            console.log("History saved")
-            reward(peep);
-            reward(subject);
-            addPeep(peep, subject);
-          }
-          if (peep.symbol === subject.symbol && peep.id != subject.id){
-            console.log("nope. not a good plan")
-              punish(peep);
-              punish(subject);
-          }
-        }
-        
-      });
+      if (map[subject.y][subject.x].length < 2){
+        result = true;
+        //if two peeps are on top of each other, shout
+        peeps.forEach(peep => {
+          if (peep.x === subject.x && peep.y === subject.y){
+            if (peep.symbol === "M" && subject.symbol === "F"){
+              console.log("History saved")
+              reward(peep);
+              reward(subject);
+              addPeep(peep, subject);
+            }
+            if (peep.symbol === subject.symbol && peep.id != subject.id){
+              console.log("nope. not a good plan")
+                punish(peep);
+                punish(subject);
+            }
+          }         
+        });
+      } else {
+        console.log ("space too full")
+        punish(subject);
+      }
     }
   }
-
   return result;
 }
 
@@ -95,7 +97,11 @@ function findState(peep){
     __: 0,
     X: 1,
     M: 2,
-    F: 3
+    F: 3,
+    MF: 4,
+    FM: 4,
+    MM: 5,
+    FF: 6
   }
 
   while (rowNum < diameter){
@@ -115,7 +121,6 @@ function findState(peep){
 
     rowNum ++;
   } 
-   
   return state;
 }
 

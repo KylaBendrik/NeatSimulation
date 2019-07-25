@@ -6,7 +6,8 @@ function mapColors(symbol){
   return {
     "__": "#FFFFFF",
     "M": "#a9d5ff",
-    "F": "#f6aaff"
+    "F": "#f6aaff",
+    "MF": "#c37fff"
   }[symbol]
 }
 
@@ -19,7 +20,8 @@ function initiateMap(){
 
     var c = 0;
     while (c < mapSize){
-      row.push("__")
+      //let's have an array containing all the peeps sitting here.
+      row.push([])
       c++;
     }
 
@@ -28,12 +30,30 @@ function initiateMap(){
   }
   
   peeps.forEach(peep => {
-    newMap[peep.y][peep.x] = peep.symbol;
+    newMap[peep.y][peep.x].push(peep.symbol);
+    console.log(newMap[peep.y][peep.x][0])
   });
 
   map = newMap;
 
   return map
+}
+
+function cellDisplay(mapNode){
+  console.log(mapNode)
+  if (mapNode.length === 0){
+    return "__";
+  }
+  if (mapNode.length === 1){
+    return mapNode[0];
+  }
+  if (mapNode.length === 2){
+    var display = (mapNode[0] + mapNode[1]);
+    if (display === "FM"){
+      return (mapNode[1] + mapNode[2])
+    }
+    return (mapNode[0] + mapNode[1])
+  }
 }
 
 function printTable(tbody){
@@ -50,8 +70,7 @@ function printTable(tbody){
     while (c < mapSize){
       
       var cell = document.createElement("td");
-  
-      cell.appendChild(document.createTextNode(map[r][c]));
+      cell.appendChild(document.createTextNode(cellDisplay(map[r][c])));
 
       cell.style.backgroundColor = mapColors(map[r][c])
   
