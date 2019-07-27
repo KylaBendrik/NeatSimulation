@@ -28,19 +28,27 @@ function intersects(rect1, rect2){
             (rect2.y  +   rect2.hei)  < rect1.y);
 }
 
+function intersectLineBox(line, rect){
+  
+}
+
 var stage = document.getElementById('map'); // Get the canvas element by Id
 var ctx = stage.getContext('2d'); // Canvas 2d rendering context
 
-function findSights(peep){
+function findSights(box){
   //straight lines/rectangles extending up from all four sides. Returns array of rectangles.
-  var sightN = {x: (peep.x), y: peep.y - peep.sight, wid: peep.wid, hei: peep.sight};
-  
-  var sightS = {x: (peep.x), y: peep.y + peep.hei, wid: peep.wid, hei: peep.sight};
-  
-  var sightE = {x: peep.x - peep.sight, y: peep.y, wid: peep.sight, hei: peep.hei};
-  var sightW = {x: peep.x + peep.wid, y: peep.y, wid: peep.sight, hei: peep.hei}
+  var boxSights = [
+    {x1:box.x + (box.wid/2), y1:box.y, 
+      x2: box.x + (box.wid/2), y2: box.y - box.sight},
+    {x1:box.x + (box.wid), y1:box.y + (box.hei/2), 
+        x2: box.x + (box.wid + box.sight), y2:box.y + (box.hei/2)},
+    {x1:box.x + (box.wid/2), y1:box.y+box.hei, 
+      x2: box.x + (box.wid/2), y2: box.y + (box.sight + box.hei)},
+    {x1:box.x, y1:box.y + (box.hei/2), 
+      x2: box.x - (box.sight), y2: box.y + (box.hei/2)},
+    ]
 
-  return [sightN, sightE, sightS, sightW];
+  return boxSights;
 }
 
 //Draw Peep
@@ -53,8 +61,10 @@ function drawSights(peep) {
   var sights = findSights(peep);
 
   sights.forEach(function(sight){
-    ctx.fillStyle = '#bababa'; // Fill color of rectangle drawn
-    ctx.fillRect(sight.x, sight.y, sight.wid, sight.hei); //This will draw a rectangle of 20x20
+    ctx.beginPath();
+	  ctx.moveTo(sight.x1, sight.y1);
+	  ctx.lineTo(sight.x2, sight.y2);
+	  ctx.stroke();
   })
 }
 

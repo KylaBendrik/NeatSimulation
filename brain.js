@@ -32,13 +32,28 @@ function touchNom(peep){
   return 0;
 }
 
-function sight(peep){
-  //
+//wallSight
+function wallSight(sight){
+  if (sight.x2 < 0 ||
+      sight.x2 > mapSize ||
+      sight.y2 < 0 ||
+      sight.y2 > mapSize){
+    
+    console.log("Crossing the wall");
+  }
 }
 
 //brain
-function randomBrain(peep){
-  
+function checkInputs(peep){
+
+  //two inputs for each sight: wallSightN, nomSightN, wallSightW, etc.
+  var sights = findSights(peep);
+
+  sights.forEach(function(sight){
+    wallSight(sight);
+  })
+
+
 }
 
 //OUTPUTS:
@@ -69,6 +84,8 @@ function move(peep){
   }
 
   touchNom(peep);
+
+  checkInputs(peep);
 
   
   drawMap()
