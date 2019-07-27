@@ -1,6 +1,10 @@
 //NEURAL NETWORK ATTEMPT #1
 
 //INPUTS:
+//sight - size*2
+
+
+
 //Touch - touching the wall
 function touchWall(peep, move){
   if ((move[0] === -1 && peep.x <= 0) ||
@@ -26,6 +30,11 @@ function touchNom(peep){
     }
   })
   return 0
+  
+}
+
+//brain
+function randomBrain(peep){
   
 }
 

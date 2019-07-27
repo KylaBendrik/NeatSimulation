@@ -4,7 +4,9 @@ function removeNom(nomNum){
 
 };
 function newNom(){
-  noms.push({x: random(mapSize - 20), y: random(mapSize - 20), quality: random(19) + 1});
+  var size = random(19) + 1;
+
+  noms.push({x: random(mapSize - size) + size, y: random(mapSize - size)+ size, quality: size});
   
 
 };
