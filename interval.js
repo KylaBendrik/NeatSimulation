@@ -2,7 +2,9 @@ var click = 0;
 
 var isPaused = false;
 
-var timer = setInterval(doStuff, 500);
+const interval = 5
+
+var timer = setInterval(doStuff, interval);
 
 function doStuff() {
   click += 1;
@@ -26,10 +28,7 @@ window.onkeydown = function(event) {
     } else {        
       isPaused = false;
       document.getElementById("paused").innerHTML = "Playing"
-      timer = setInterval(doStuff, 500);
+      timer = setInterval(doStuff, interval);
     }
   }
-
-
-   console.log(keyPr);
 };
