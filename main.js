@@ -1,12 +1,3 @@
-var click = 0;
-
-var isPaused = true;
-
-var timer = new Timer(function() {
-  click ++;
-  console.log("timer")
-}, 100);
-
 function random(limit){
   return (Math.floor(Math.random() * limit))
 }
