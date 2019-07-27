@@ -6,7 +6,8 @@ var timer = setInterval(doStuff, 500);
 
 function doStuff() {
   click += 1;
-  document.getElementById("click").innerHTML = click
+  document.getElementById("click").innerHTML = click;
+  move(peep1);
 }
 
 function stopStuff() {
@@ -31,10 +32,4 @@ window.onkeydown = function(event) {
 
 
    console.log(keyPr);
-  /*clearing anything drawn on canvas
-   *comment this below do draw path */
-  ctx.clearRect(0,0, 500, 500);
-
-  //Drawing rectangle at new position
-  drawRect(x,y,wid,hei);
 };
