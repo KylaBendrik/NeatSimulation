@@ -29,8 +29,11 @@ function touchNom(peep){
       return 1
     }
   })
-  return 0
-  
+  return 0;
+}
+
+function sight(peep){
+  //
 }
 
 //brain

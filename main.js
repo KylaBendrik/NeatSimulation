@@ -51,7 +51,6 @@ function drawRect(peep) {
 
 function drawSights(peep) {
   var sights = findSights(peep);
-  console.log(sights)
 
   sights.forEach(function(sight){
     ctx.fillStyle = '#bababa'; // Fill color of rectangle drawn
@@ -61,6 +60,7 @@ function drawSights(peep) {
 
 //draw nom
 function drawNom(nom){
+  ctx.beginPath();
   ctx.arc(nom.x, nom.y, nom.quality, 0, 2 * Math.PI);
   ctx.fillStyle = '#7fa678';
   ctx.fill();
