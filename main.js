@@ -1,6 +1,11 @@
-var pause = true;
-
 var click = 0;
+
+var isPaused = true;
+
+var timer = new Timer(function() {
+  click ++;
+  console.log("timer")
+}, 100);
 
 function random(limit){
   return (Math.floor(Math.random() * limit))
@@ -21,37 +26,6 @@ function drawRect(x,y,wid,hei) {
 
 drawRect(x,y,wid,hei); //Drawing rectangle on initial load
 
-function plusClick() {
-  click += 1;
-  document.getElementById("click").innerHTML = click
-}
-
-//move rectangle inside the canvas using arrow keys
-window.onkeydown = function(event) {
-    var keyPr = event.keyCode; //Key code of key pressed
-
-  
-    if (keyPr === 32){
-      var t = undefined;
-      if (pause === true){
-        pause === false
-        clearInterval(t);
-      } else{
-        pause === true;
-        t = setInterval(clickMove, 1000)
-      }
-
-    }
-
-
-		 console.log(keyPr);
-  	/*clearing anything drawn on canvas
-     *comment this below do draw path */
-    ctx.clearRect(0,0, 500, 500);
-  
-  	//Drawing rectangle at new position
-    drawRect(x,y,wid,hei);
-};
 
 function move(numClicks){
   //move rectangle randomly
@@ -62,13 +36,4 @@ function move(numClicks){
   console.log("move is: " + moves[move][0])
 
   return moves[move]
-}
-
-
-
-function clickMove(){
-  x += move(1)[0];
-  y += move(1)[1];
-
-  plusClick();
 }
