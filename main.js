@@ -1,12 +1,31 @@
 //setup
 
 const mapSize = 100
-var peep1 = {x: random(mapSize - 20), y: random(mapSize - 20), wid: 20, hei: 20, score: 0, sight: 30};
+var peep1 = {x: random(mapSize - 20), y: random(mapSize - 20), wid: 20, hei: 20, score: 0, sight: 30, weights: [], hlNodes: 1};
+
+randomWeights(peep1);
 
 var noms = [
   {x: random(mapSize - 20), y: random(mapSize - 20), quality: random(19) + 1},
   {x: random(mapSize - 20), y: random(mapSize - 20), quality: random(19) + 1}
 ];
+
+function randomWeights(peep){
+  var sights = findSights(peep);
+  var i = 0;
+
+  //for each node, we need a weight for every input going into it
+  while (i < peep.hlNodes){
+    //each node takes in all the inputs and their weights. For now, lets have as many hidden layer nodes as outputs.
+    sights.forEach(function(sight){
+      peep.weights.push(random(10) / 10)
+    })
+
+    i++;
+  }
+
+  console.log(peep1.weights)
+}
 
 function random(limit){
   return (Math.floor(Math.random() * limit))
@@ -29,7 +48,7 @@ function intersects(rect1, rect2){
 }
 
 function intersectLineBox(line, rect){
-  
+
 }
 
 var stage = document.getElementById('map'); // Get the canvas element by Id

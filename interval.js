@@ -2,7 +2,7 @@ var click = 0;
 
 var isPaused = false;
 
-const interval = 5
+const interval = 50
 
 var timer = setInterval(doStuff, interval);
 
