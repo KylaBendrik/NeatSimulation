@@ -113,8 +113,9 @@ function outputs(hiddenLayer){
   var outputs = []
 
   hiddenLayer.forEach(function(node){
-
+    outputs.push(activate(node));
   })
+  return outputs
 }
 
 function punish(peep, amount){
@@ -134,8 +135,12 @@ function move(peep){
   //now, instead of random as above, it will be dictated by the inputs.
   var move = [0, 0];
 
-  hiddenLayer(peep);
-  
+  var hiddenLayer = hiddenLayer(peep);
+
+  var outputs = outputs(hiddenLayer);
+
+  console.log(outputs)
+
 
 
   //if movement would move peep outside bounds, punish
